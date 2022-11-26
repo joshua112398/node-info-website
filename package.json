@@ -1,0 +1,25 @@
+{
+  "name": "info-site",
+  "version": "1.0.0",
+  "description": "A simple project with Node.js that uses the HTTP module and URL class to create an index page where you can click links to go to other pages. The server then loads the correct HTML page based on the requested URL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshua112398/node-info-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshua112398/node-info-website/issues"
+  },
+  "homepage": "https://github.com/joshua112398/node-info-website#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0"
+  }
+}
