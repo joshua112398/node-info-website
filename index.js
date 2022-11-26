@@ -1,32 +1,28 @@
-const http = require('http');
-var fs = require('fs/promises');
+import express from 'express';
+import path from 'path';
+import {fileURLToPath} from 'url';
+const app = express();
+const router = express.Router();
+const port = 8080;
 
-async function read(filepath) {
-  try {
-    const data = await fs.readFile(filepath, { encoding: 'utf8' });
-  } catch (err) {
-    console.log(err);
-  }
-}
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-http.createServer(async function (req, res) {
-  try {
-    let filepath;
-    if (req.url === '/') {
-      filepath='index.html';
-    } else if (req.url === '/about') {
-      filepath='about.html';
-    } else if (req.url === '/contact-me') {
-      filepath='contact-me.html';
-    } else {
-      filepath='404.html';
-    }
+router.get('/', function(req,res){
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
 
-    const data = await fs.readFile(filepath, { encoding: 'utf8' });
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    return res.end();
-  } catch (err) {
-    console.log(err);
-  }
-}).listen(8080);
+router.get('/about', function(req,res){
+  res.sendFile(path.join(__dirname + '/about.html'));
+});
+
+router.get('/contact-me', function(req,res){
+  res.sendFile(path.join(__dirname + '/contact-me.html'));
+});
+
+router.get('*', function(req,res){
+  res.sendFile(path.join(__dirname + '/404.html'));
+});
+
+app.use('/', router);
+app.listen(port);
